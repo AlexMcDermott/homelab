@@ -1,6 +1,6 @@
 services:
   homarr:
-    container_name: homarr_test
+    container_name: homarr
     image: ghcr.io/ajnart/homarr:latest
     restart: unless-stopped
     volumes:
