@@ -1,6 +1,6 @@
 services:
   portainer:
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer-ce:2.19.4
     container_name: portainer
     restart: unless-stopped
     ports:
@@ -11,7 +11,7 @@ services:
       - data:/data
 
   portainer_agent:
-    image: portainer/agent:latest
+    image: portainer/agent:2.19.4
     container_name: portainer_agent
     restart: unless-stopped
     ports:
