@@ -9,6 +9,12 @@ services:
       - /run/dbus:/run/dbus:ro
     privileged: true
     network_mode: host
+    networks:
+      - traefik_default
 
 volumes:
   config:
+
+networks:
+  traefik_default:
+    external: true
