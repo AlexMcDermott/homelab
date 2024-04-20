@@ -13,6 +13,16 @@ services:
       --entrypoints.web.http.redirections.entryPoint.to=websecure
       --entrypoints.web.http.redirections.entryPoint.scheme=https
       --entrypoints.websecure.address=:443
+
+      --certificatesresolvers.staging.acme.email=alexjmcd2202@gmail.com
+      --certificatesresolvers.staging.acme.storage=/ssl-certs/acme.json
+      --certificatesresolvers.staging.acme.httpchallenge.entrypoint=web
+      --certificatesresolvers.staging.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+
+      --certificatesresolvers.production.acme.email=alexjmcd2202@gmail.com
+      --certificatesresolvers.production.acme.storage=/ssl-certs/acme.json
+      --certificatesresolvers.production.acme.httpchallenge.entrypoint=web
+      --certificatesresolvers.production.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
     ports:
       - "80:80"
       - "443:443"
