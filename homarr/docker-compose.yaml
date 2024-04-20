@@ -13,7 +13,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.homarr.entrypoints: websecure
-      traefik.http.routers.homarr.rule: Host(`grom.local/homarr`)
+      traefik.http.routers.homarr.rule: Host(`grom.local`)
       traefik.http.routers.homarr.tls: true
       traefik.http.routers.homarr.tls.certresolver: staging
 
