@@ -10,6 +10,10 @@ services:
       - data:/data
     networks:
       - traefik_default
+    labels:
+      traefik.enable: true
+      traefik.http.routers.homarr.entrypoints: web
+      traefik.http.routers.homarr.rule: Host(`homarr.grom.local`)
 
 volumes:
   configs:
