@@ -13,7 +13,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.homarr.entrypoints: web
-      traefik.http.routers.homarr.rule: Host(`homarr.grom.local`)
+      traefik.http.routers.homarr.rule: Host(`grom.local/homarr`)
 
 volumes:
   configs:
