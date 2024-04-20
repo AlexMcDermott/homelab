@@ -6,6 +6,7 @@ services:
     command: >
       --api.insecure=true
       --providers.docker
+      --providers.marathon.exposedByDefault=false
       --entrypoints.web.address=:80
       --entrypoints.web.http.redirections.entryPoint.to=websecure
       --entrypoints.web.http.redirections.entryPoint.scheme=https
