@@ -10,11 +10,11 @@ services:
     privileged: true
     network_mode: host
     networks:
-      - traefik_default
+      - traefik
 
 volumes:
   config:
 
 networks:
-  traefik_default:
+  traefik:
     external: true
