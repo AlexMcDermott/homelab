@@ -7,8 +7,8 @@ services:
     environment:
       - TUNNEL_TOKEN=$TUNNEL_TOKEN
     networks:
-      - traefik
+      - traefik_default
 
 networks:
-  traefik:
+  traefik_default:
     external: true
