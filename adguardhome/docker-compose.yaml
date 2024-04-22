@@ -22,6 +22,6 @@ services:
       - "5443:5443/tcp"
       - "5443:5443/udp"
 
-volumnes:
+volumes:
   work:
   conf:
