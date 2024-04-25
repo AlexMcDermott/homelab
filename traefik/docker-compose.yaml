@@ -11,23 +11,21 @@ services:
       --providers.docker
       --providers.docker.exposedByDefault=false
 
+      --entrypoints.dns.address=:53
       --entrypoints.web.address=:80
       --entrypoints.websecure.address=:443
-      --entrypoints.dot.address=:853
 
       --entrypoints.web.http.redirections.entryPoint.to=websecure
       --entrypoints.web.http.redirections.entryPoint.scheme=https
 
       --certificatesresolvers.staging.acme.dnschallenge=true
       --certificatesresolvers.staging.acme.dnschallenge.provider=cloudflare
-      --certificatesresolvers.staging.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53
       --certificatesresolvers.staging.acme.email=alexjmcd2202@gmail.com
       --certificatesresolvers.staging.acme.storage=/ssl-certs/acme.json
       --certificatesresolvers.staging.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 
       --certificatesresolvers.production.acme.dnschallenge=true
       --certificatesresolvers.production.acme.dnschallenge.provider=cloudflare
-      --certificatesresolvers.production.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53
       --certificatesresolvers.production.acme.email=alexjmcd2202@gmail.com
       --certificatesresolvers.production.acme.storage=/ssl-certs/acme.json
       --certificatesresolvers.production.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
@@ -39,6 +37,7 @@ services:
       traefik.http.routers.traefik.tls.domains[0].main: alexisthe.best
       traefik.http.routers.traefik.tls.domains[0].sans: "*.alexisthe.best"
     ports:
+      - "53:53"
       - "80:80"
       - "443:443"
       - "853:853"

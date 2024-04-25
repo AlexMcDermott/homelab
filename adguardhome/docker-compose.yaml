@@ -10,8 +10,8 @@ services:
       - conf:/opt/adguardhome/conf
     ports:
       # DNS
-      - "53:53/tcp"
-      - "53:53/udp"
+      # - "53:53/tcp"
+      # - "53:53/udp"
 
       # DNS-over-HTTPS / Dashboard
       - "81:80/tcp"
@@ -21,6 +21,12 @@ services:
 
       # # DNS-over-TLS
       # - "853:853/tcp"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.adguardhome.entrypoints: dns
+      traefik.http.routers.adguardhome.rule: Host(`adguardhome.alexisthe.best`)
+      # traefik.http.routers.adguardhome.tls: true
+      # traefik.http.routers.adguardhome.tls.certresolver: staging
 
 volumes:
   work:
