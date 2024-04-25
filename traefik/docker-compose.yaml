@@ -13,6 +13,7 @@ services:
 
       --entrypoints.web.address=:80
       --entrypoints.websecure.address=:443
+      --entrypoints.dot.address=:853
 
       --entrypoints.web.http.redirections.entryPoint.to=websecure
       --entrypoints.web.http.redirections.entryPoint.scheme=https
@@ -40,6 +41,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "853:853"
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
