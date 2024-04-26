@@ -23,10 +23,13 @@ services:
       # - "853:853/tcp"
     labels:
       traefik.enable: true
-      traefik.http.routers.adguardhome.entrypoints: dns
       traefik.http.routers.adguardhome.rule: Host(`grom.local`)
-      # traefik.http.routers.adguardhome.tls: true
-      # traefik.http.routers.adguardhome.tls.certresolver: staging
+      traefik.http.routers.adguardhome.entrypoints: dns
+      traefik.http.routers.adguardhome.tls: true
+      traefik.http.routers.adguardhome.tls.certresolver: staging
+      traefik.http.services.adguardhome.loadbalancer.server.port: 53
+      traefik.http.services.adguardhome.loadbalancer.server.scheme: tcp
+      
 
 volumes:
   work:
