@@ -24,7 +24,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.adguardhome.entrypoints: dns
-      traefik.http.routers.adguardhome.rule: Host(`adguardhome.alexisthe.best`)
+      traefik.http.routers.adguardhome.rule: Host(`grom.local`)
       # traefik.http.routers.adguardhome.tls: true
       # traefik.http.routers.adguardhome.tls.certresolver: staging
 
