@@ -13,7 +13,7 @@ services:
     labels:
       traefik.enable: true
       traefik.http.routers.homarr.entrypoints: websecure
-      traefik.http.routers.homarr.rule: Host(`homarr.home.local.alexisthe.best`) || Host(`homarr.home.alexisthe.best`)
+      traefik.http.routers.homarr.rule: Host(`homarr.local.alexisthe.best`) || Host(`homarr.alexisthe.best`)
       traefik.http.routers.homarr.tls: true
       traefik.http.routers.homarr.tls.certresolver: staging
 
