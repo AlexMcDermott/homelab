@@ -30,13 +30,13 @@ services:
       --certificatesresolvers.production.acme.email=alexjmcd2202@gmail.com
       --certificatesresolvers.production.acme.storage=/ssl-certs/acme.json
       --certificatesresolvers.production.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
-    labels:
-      traefik.enable: true
-      traefik.http.routers.traefik.rule: Host(`grom.local`)
-      traefik.http.routers.traefik.entrypoints: websecure
-      traefik.http.routers.traefik.tls.certresolver: staging
-      traefik.http.routers.traefik.tls.domains[0].main: alexisthe.best
-      traefik.http.routers.traefik.tls.domains[0].sans: "*.alexisthe.best"
+    # labels:
+      # traefik.enable: true
+      # traefik.http.routers.traefik.rule: Host(`grom.local`)
+      # traefik.http.routers.traefik.entrypoints: websecure
+      # traefik.http.routers.traefik.tls.certresolver: staging
+      # traefik.http.routers.traefik.tls.domains[0].main: alexisthe.best
+      # traefik.http.routers.traefik.tls.domains[0].sans: "*.alexisthe.best"
     ports:
       - "53:53/tcp"
       - "53:53/udp"
