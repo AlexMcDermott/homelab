@@ -11,13 +11,13 @@ services:
       --providers.docker
       --providers.docker.exposedByDefault=false
 
-      --entrypoints.dns.address=:53
-      --entrypoints.dns.address=:53/udp
-      --entrypoints.web.address=:80
-      --entrypoints.websecure.address=:443
 
-      --entrypoints.web.http.redirections.entryPoint.to=websecure
-      --entrypoints.web.http.redirections.entryPoint.scheme=https
+      --entryPoints.dns.address=:53/udp
+      --entryPoints.web.address=:80
+      --entryPoints.websecure.address=:443
+
+      --entryPoints.web.http.redirections.entryPoint.to=websecure
+      --entryPoints.web.http.redirections.entryPoint.scheme=https
 
       --certificatesresolvers.staging.acme.dnschallenge=true
       --certificatesresolvers.staging.acme.dnschallenge.provider=cloudflare

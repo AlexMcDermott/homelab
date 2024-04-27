@@ -24,11 +24,17 @@ services:
     labels:
       traefik.enable: true
       # traefik.http.routers.adguardhome.tls: true
-      traefik.http.routers.adguardhome.entrypoints: dns
-      traefik.http.routers.adguardhome.rule: Host(`grom.local`)
+      traefik.udp.routers.adguardhome.entrypoints: dns
+      traefik.udp.routers.adguardhome.rule: Host(`grom.local`)
+      traefik.udp.services.adguardhome.loadbalancer.server.port: 53
       # traefik.http.routers.adguardhome.tls.certresolver: staging
       # traefik.http.services.adguardhome.loadbalancer.server.port: 53
       # traefik.http.services.adguardhome.loadbalancer.server.scheme: tcp
+
+      
+      
+      
+
       
 
 volumes:
