@@ -38,7 +38,7 @@ services:
       traefik.http.routers.traefik.tls.domains[0].main: alexisthe.best
       traefik.http.routers.traefik.tls.domains[0].sans: "*.alexisthe.best"
     ports:
-      - "53:53/tpc"
+      - "53:53/tcp"
       - "53:53/udp"
       - "80:80"
       - "443:443"
