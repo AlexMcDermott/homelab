@@ -30,7 +30,7 @@ services:
       traefik.http.routers.adguardhome.tls.certresolver: staging
       traefik.http.routers.adguardhome.entrypoints: websecure
       traefik.http.routers.adguardhome.rule: Host(`adguardhome.local.alexisthe.best`)
-      # traefik.http.services.registry.loadbalancer.server.port: 80
+      traefik.http.services.adguardhome.loadbalancer.server.port: 80
 
       # - "traefik.http.routers.gitlab.rule=Host(`gitlab.example.com`)"
       # - "traefik.http.routers.gitlab.service=gitlab"
