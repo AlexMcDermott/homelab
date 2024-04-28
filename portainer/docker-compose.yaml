@@ -6,6 +6,7 @@ services:
     ports:
       - "8000:8000"
     labels:
+      traefik.enable: true
       traefik.http.routers.portainer.tls: true
       traefik.http.routers.portainer.tls.certresolver: staging
       traefik.http.routers.portainer.entrypoints: websecure
