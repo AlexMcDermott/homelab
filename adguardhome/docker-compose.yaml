@@ -13,12 +13,6 @@ services:
       traefik.udp.routers.adguardhome.entrypoints: dns
       traefik.udp.services.adguardhome.loadbalancer.server.port: 53
 
-      traefik.tcp.routers.adguardhome.tls: true
-      traefik.tcp.routers.adguardhome.tls.certresolver: staging
-      traefik.tcp.routers.adguardhome.entrypoints: dot
-      traefik.tcp.routers.adguardhome.rule: Host(`adguardhome.local.alexisthe.best`)
-      traefik.tcp.services.adguardhome.loadbalancer.server.port: 853
-
       traefik.http.routers.adguardhome.tls: true
       traefik.http.routers.adguardhome.tls.certresolver: staging
       traefik.http.routers.adguardhome.entrypoints: websecure
