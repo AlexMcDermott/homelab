@@ -14,7 +14,7 @@ services:
       # - "53:53/udp"
 
       # DNS-over-HTTPS / Dashboard
-      - "82:80/tcp"
+      # - "82:80/tcp"
       # - "444:443/tcp"
       # - "444:443/udp"
       # - "3000:3000/tcp"
@@ -26,6 +26,10 @@ services:
       traefik.udp.routers.adguardhome.entrypoints: dns
       traefik.udp.services.adguardhome.loadbalancer.server.port: 53
 
+      traefik.http.routers.adguardhome.tls: true
+      traefik.http.routers.adguardhome.tls.certresolver: staging
+      traefik.http.routers.adguardhome.entrypoints: websecure
+      traefik.http.routers.adguardhome.rule: Host(`adguardhome.local.alexisthe.best`)
 volumes:
   work:
   conf:
