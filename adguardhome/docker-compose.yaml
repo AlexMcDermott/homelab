@@ -8,19 +8,19 @@ services:
     volumes:
       - work:/opt/adguardhome/work
       - conf:/opt/adguardhome/conf
-    ports:
-      # DNS
-      # - "53:53/tcp"
-      # - "53:53/udp"
+    # ports:
+    # DNS
+    # - "53:53/tcp"
+    # - "53:53/udp"
 
-      # DNS-over-HTTPS / Dashboard
-      # - "82:80/tcp"
-      # - "444:443/tcp"
-      # - "444:443/udp"
-      # - "3000:3000/tcp"
+    # DNS-over-HTTPS / Dashboard
+    # - "82:80/tcp"
+    # - "444:443/tcp"
+    # - "444:443/udp"
+    # - "3000:3000/tcp"
 
-      # # DNS-over-TLS
-      # - "853:853/tcp"
+    # # DNS-over-TLS
+    # - "853:853/tcp"
     labels:
       traefik.enable: true
       traefik.udp.routers.adguardhome.entrypoints: dns
