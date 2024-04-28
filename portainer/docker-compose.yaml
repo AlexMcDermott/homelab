@@ -4,7 +4,6 @@ services:
     container_name: portainer
     restart: unless-stopped
     ports:
-      - "8000:8000"
       - "9443:9443"
     labels:
       traefik.enable: true
