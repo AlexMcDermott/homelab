@@ -10,6 +10,9 @@ services:
       - conf:/opt/adguardhome/conf
     labels:
       traefik.enable: true
+      traefik.udp.routers.adguardhome.entrypoints: dns
+      traefik.udp.services.adguardhome.loadbalancer.server.port: 53
+
       traefik.tcp.routers.adguardhome.tls: true
       traefik.tcp.routers.adguardhome.tls.certresolver: staging
       traefik.tcp.routers.adguardhome.entrypoints: dot

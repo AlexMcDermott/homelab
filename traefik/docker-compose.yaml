@@ -11,6 +11,7 @@ services:
       --providers.docker
       --providers.docker.exposedByDefault=false
 
+      --entryPoints.dns.address=:53/udp
       --entryPoints.web.address=:80
       --entryPoints.websecure.address=:443
       --entryPoints.dot.address=:853
@@ -42,6 +43,7 @@ services:
       traefik.http.routers.traefik.tls.domains[0].sans[0]: "*.alexisthe.best"
       traefik.http.routers.traefik.tls.domains[0].sans[1]: "*.local.alexisthe.best"
     ports:
+      - "53:53/udp"
       - "80:80"
       - "443:443"
       - "853:853"
