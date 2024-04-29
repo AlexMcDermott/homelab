@@ -24,6 +24,13 @@ services:
     restart: unless-stopped
     ports:
       - "9001:9001"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.portainer.tls: true
+      traefik.http.routers.portainer.tls.certresolver: staging
+      traefik.http.routers.portainer.entrypoints: websecure
+      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
+      traefik.http.services.portainer.loadbalancer.server.port: 9001
     networks:
       - traefik_default
     volumes:
