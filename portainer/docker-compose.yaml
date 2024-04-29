@@ -12,6 +12,11 @@ services:
       traefik.http.routers.portainer.entrypoints: websecure
       traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
       traefik.http.services.portainer.loadbalancer.server.port: 9443
+
+      traefik.http.routers.http-catchall.rule: hostregexp(`{host:.+}`)
+      traefik.http.routers.http-catchall.entrypoints: web
+      traefik.http.routers.http-catchall.middlewares: redirect-to-https
+      traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: https
     networks:
       - traefik_default
     volumes:
