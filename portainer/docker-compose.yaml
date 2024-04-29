@@ -3,13 +3,13 @@ services:
     image: portainer/portainer-ce:2.19.4
     container_name: portainer
     restart: unless-stopped
-    # ports:
-    #   - "9443:9443"
+    ports:
+      - "9443:9443"
     labels:
       traefik.enable: true
       traefik.http.routers.portainer.tls: true
       traefik.http.routers.portainer.tls.certresolver: staging
-      traefik.http.routers.portainer.entrypoints: test2
+      traefik.http.routers.portainer.entrypoints: websecure
       traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
       traefik.http.services.portainer.loadbalancer.server.port: 9443
     networks:
@@ -22,15 +22,8 @@ services:
     image: portainer/agent:2.19.4
     container_name: portainer-agent
     restart: unless-stopped
-    # ports:
-    #   - "9001:9001"
-    labels:
-      traefik.enable: true
-      traefik.http.routers.portainer.tls: true
-      traefik.http.routers.portainer.tls.certresolver: staging
-      traefik.http.routers.portainer.entrypoints: test1
-      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
-      traefik.http.services.portainer.loadbalancer.server.port: 9001
+    ports:
+      - "9001:9001"
     networks:
       - traefik_default
     volumes:
