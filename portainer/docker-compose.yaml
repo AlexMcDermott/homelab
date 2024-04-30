@@ -10,9 +10,11 @@ services:
       - data:/data
     labels:
       traefik.enable: true
-      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
-      traefik.http.routers.portainer.entrypoints: websecure
+      traefik.http.routers.portainer.tls: true
       traefik.http.routers.portainer.tls.certresolver: staging
+      traefik.http.routers.portainer.entrypoints: websecure
+      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
+      traefik.http.services.portainer.loadbalancer.server.port: 9443
 
   portainer-agent:
     image: portainer/agent:2.19.4
