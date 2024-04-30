@@ -3,6 +3,8 @@ services:
     image: portainer/portainer-ce:2.19.4
     container_name: portainer
     restart: unless-stopped
+    ports:
+      - "9443:9443"
     networks:
       - traefik_default
     volumes:
