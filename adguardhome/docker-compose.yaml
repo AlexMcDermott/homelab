@@ -14,7 +14,7 @@ services:
       traefik.udp.services.adguardhome.loadbalancer.server.port: 53
 
       traefik.http.routers.adguardhome.tls: true
-      traefik.http.routers.adguardhome.tls.certresolver: staging
+      traefik.http.routers.adguardhome.tls.certresolver: production
       traefik.http.routers.adguardhome.entrypoints: websecure
       traefik.http.routers.adguardhome.rule: Host(`adguardhome.local.alexisthe.best`)
       traefik.http.services.adguardhome.loadbalancer.server.port: 80
