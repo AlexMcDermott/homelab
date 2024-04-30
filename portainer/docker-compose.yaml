@@ -3,21 +3,16 @@ services:
     image: portainer/portainer-ce:2.19.4
     container_name: portainer
     restart: unless-stopped
-    ports:
-      - "9443:9443"
-    labels:
-      traefik.enable: true
-      traefik.http.routers.portainer.tls: true
-      traefik.http.routers.portainer.tls.certresolver: staging
-      traefik.http.routers.portainer.entrypoints: websecure
-      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
-      traefik.http.services.portainer.loadbalancer.server.port: 9443
-      traefik.http.routers.portainer.service: portainer
     networks:
       - traefik_default
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - data:/data
+    labels:
+      traefik.enable: true
+      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
+      traefik.http.routers.portainer.entrypoints: websecure
+      traefik.http.routers.portainer.tls.certresolver: staging
 
   portainer-agent:
     image: portainer/agent:2.19.4
@@ -25,14 +20,6 @@ services:
     restart: unless-stopped
     ports:
       - "9001:9001"
-    labels:
-      traefik.enable: true
-      traefik.http.routers.portainer-agent.tls: true
-      traefik.http.routers.portainer-agent.tls.certresolver: staging
-      traefik.http.routers.portainer-agent.entrypoints: websecure
-      traefik.http.routers.portainer-agent.rule: Host(`portainer-agent.local.alexisthe.best`)
-      traefik.http.services.portainer-agent.loadbalancer.server.port: 9001
-      traefik.http.routers.portainer-agent.service: portainer-agent
     networks:
       - traefik_default
     volumes:

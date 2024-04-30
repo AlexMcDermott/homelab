@@ -37,11 +37,6 @@ services:
       traefik.http.routers.traefik.rule: Host(`traefik.local.alexisthe.best`)
       traefik.http.routers.traefik.service: api@internal
 
-      traefik.http.routers.http-catchall.rule: HostRegexp(`traefik\.local\.alexisthe\.best:.+`)
-      traefik.http.routers.http-catchall.entrypoints: web
-      traefik.http.routers.http-catchall.middlewares: redirect-to-https
-      traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: https
-
       # Wildcard certificates
       traefik.http.routers.traefik.tls.domains[0].main: alexisthe.best
       traefik.http.routers.traefik.tls.domains[0].sans[0]: "*.alexisthe.best"
