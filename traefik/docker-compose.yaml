@@ -22,7 +22,7 @@ services:
       --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
       --certificatesresolvers.cloudflare.acme.email=alexjmcd2202@gmail.com
       --certificatesresolvers.cloudflare.acme.storage=/ssl-certs/acme.json
-      --certificatesresolvers.cloudflare.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
+      --certificatesresolvers.cloudflare.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
     labels:
       traefik.enable: true
       traefik.http.routers.traefik.tls: true
