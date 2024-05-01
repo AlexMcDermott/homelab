@@ -18,21 +18,15 @@ services:
       --entryPoints.web.http.redirections.entryPoint.to=websecure
       --entryPoints.web.http.redirections.entryPoint.scheme=https
 
-      --certificatesresolvers.staging.acme.dnschallenge=true
-      --certificatesresolvers.staging.acme.dnschallenge.provider=cloudflare
-      --certificatesresolvers.staging.acme.email=alexjmcd2202@gmail.com
-      --certificatesresolvers.staging.acme.storage=/ssl-certs/acme.json
-      --certificatesresolvers.staging.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
-
-      --certificatesresolvers.production.acme.dnschallenge=true
-      --certificatesresolvers.production.acme.dnschallenge.provider=cloudflare
-      --certificatesresolvers.production.acme.email=alexjmcd2202@gmail.com
-      --certificatesresolvers.production.acme.storage=/ssl-certs/acme.json
-      --certificatesresolvers.production.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
+      --certificatesresolvers.cloudflare.acme.dnschallenge=true
+      --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
+      --certificatesresolvers.cloudflare.acme.email=alexjmcd2202@gmail.com
+      --certificatesresolvers.cloudflare.acme.storage=/ssl-certs/acme.json
+      --certificatesresolvers.cloudflare.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
     labels:
       traefik.enable: true
       traefik.http.routers.traefik.tls: true
-      traefik.http.routers.traefik.tls.certresolver: production
+      traefik.http.routers.traefik.tls.certresolver: cloudflare
       traefik.http.routers.traefik.entrypoints: websecure
       traefik.http.routers.traefik.rule: Host(`traefik.local.alexisthe.best`)
       traefik.http.routers.traefik.service: api@internal
@@ -46,6 +40,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ssl-certs:/ssl-certs
 
