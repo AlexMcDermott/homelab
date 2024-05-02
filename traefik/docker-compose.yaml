@@ -19,11 +19,12 @@ services:
       --entryPoints.web.http.redirections.entryPoint.to=websecure
       --entryPoints.web.http.redirections.entryPoint.scheme=https
 
-      --certificatesresolvers.cloudflare.acme.dnschallenge=true
-      --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
       --certificatesresolvers.cloudflare.acme.email=alexjmcd2202@gmail.com
       --certificatesresolvers.cloudflare.acme.storage=/ssl-certs/acme.json
       --certificatesresolvers.cloudflare.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      --certificatesresolvers.cloudflare.acme.dnschallenge=true
+      --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
+      --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
     labels:
       traefik.enable: true
       traefik.http.routers.traefik.tls: true
