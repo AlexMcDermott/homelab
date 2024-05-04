@@ -45,7 +45,7 @@ services:
       traefik.http.routers.http-catchall.middlewares: redirect-to-https
       traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: https
     ports:
-      - "53:53"
+      - "53:53/tcp"
       - "53:53/udp"
       - "80:80"
       - "443:443"
