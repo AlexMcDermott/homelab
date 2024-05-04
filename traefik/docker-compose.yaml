@@ -9,6 +9,8 @@ services:
       --api=true
       --log.level=DEBUG
 
+      --serversTransport.insecureSkipVerify=true
+
       --providers.docker
       --providers.docker.exposedByDefault=false
 
