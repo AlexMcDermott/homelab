@@ -21,7 +21,7 @@ services:
 
       --certificatesresolvers.cloudflare.acme.email=alexjmcd2202@gmail.com
       --certificatesresolvers.cloudflare.acme.storage=/ssl-certs/acme.json
-      --certificatesresolvers.cloudflare.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      --certificatesresolvers.cloudflare.acme.caserver=https://acme-v02.api.letsencrypt.org/directory
       --certificatesresolvers.cloudflare.acme.dnschallenge=true
       --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
       --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
@@ -32,8 +32,6 @@ services:
       traefik.http.routers.traefik.entrypoints: websecure
       traefik.http.routers.traefik.rule: Host(`traefik.local.alexisthe.best`)
       traefik.http.routers.traefik.service: api@internal
-      traefik.http.middlewares.test-auth.basicauth.users: test:5f4dcc3b5aa765d61d8327deb882cf99
-      traefik.http.routers.traefik.middlewares: test-auth@docker
 
       # Wildcard certificates
       traefik.http.routers.traefik.tls.domains[0].main: local.alexisthe.best
