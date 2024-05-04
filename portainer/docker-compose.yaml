@@ -31,8 +31,8 @@ services:
     image: portainer/agent:2.19.4
     container_name: portainer-agent
     restart: unless-stopped
-    # ports:
-    #   - "9001:9001"
+    ports:
+      - "9001:9001"
     networks:
       - traefik_default
     volumes:
