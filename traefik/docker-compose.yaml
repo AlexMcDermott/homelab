@@ -33,6 +33,7 @@ services:
       traefik.http.routers.traefik.rule: Host(`traefik.local.alexisthe.best`)
       traefik.http.routers.traefik.service: api@internal
       traefik.http.middlewares.test-auth.basicauth.users: test:5f4dcc3b5aa765d61d8327deb882cf99
+      traefik.http.routers.traefik.middlewares: test-auth@docker
 
       # Wildcard certificates
       traefik.http.routers.traefik.tls.domains[0].main: alexisthe.best
