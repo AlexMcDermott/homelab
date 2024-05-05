@@ -1,6 +1,7 @@
 services:
   portainer:
     image: portainer/portainer-ce:2.19.4
+    command: -H unix:///var/run/docker.sock
     container_name: portainer
     restart: unless-stopped
     networks:
