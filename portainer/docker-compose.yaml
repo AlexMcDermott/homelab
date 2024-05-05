@@ -16,12 +16,14 @@ services:
       traefik.http.routers.portainer.tls.certresolver: cloudflare
       traefik.http.routers.portainer.entrypoints: websecure
       traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
+      traefik.http.routers.portainer.service: portainer
       traefik.http.services.portainer.loadbalancer.server.port: 9000
 
       traefik.http.routers.portainer-edge-agent.tls: true
       traefik.http.routers.portainer-edge-agent.tls.certresolver: cloudflare
       traefik.http.routers.portainer-edge-agent.entrypoints: websecure
       traefik.http.routers.portainer-edge-agent.rule: Host(`portainer-edge-agent.local.alexisthe.best`)
+      traefik.http.routers.portainer-edge-agent.service: portainer
       traefik.http.services.portainer-edge.loadbalancer.server.port: 8000
 
   portainer-edge-agent:
