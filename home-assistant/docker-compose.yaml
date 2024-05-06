@@ -8,15 +8,14 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     privileged: true
-    networks:
-      - host
-      - traefik_default
+    # networks:
+    #   - traefik_default
+    ports:
+      - "8123:8123"
 
 volumes:
   config:
 
 networks:
   traefik_default:
-    external: true
-  host:
     external: true
