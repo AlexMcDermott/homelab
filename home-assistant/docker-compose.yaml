@@ -8,7 +8,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     privileged: true
-    network_mode: host
+    networks:
+      - host
+      - traefik_default
 
 volumes:
   config:
