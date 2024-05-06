@@ -10,6 +10,8 @@ services:
     privileged: true
     networks:
       - traefik_default
+    ports:
+      - "21063:21063"
     labels:
       traefik.enable: true
       traefik.http.routers.home-assistant.tls: true
