@@ -8,10 +8,16 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     privileged: true
-    # networks:
-    #   - traefik_default
-    ports:
-      - "8123:8123"
+    networks:
+      - traefik_default
+    labels:
+      traefik.enable: true
+      traefik.http.routers.home-assistant.tls: true
+      traefik.http.routers.home-assistant.tls.certresolver: cloudflare
+      traefik.http.routers.home-assistant.entrypoints: websecure
+      traefik.http.routers.home-assistant.rule: Host(`home-assistant.local.alexisthe.best`)
+      traefik.http.routers.home-assistant.service: home-assistant
+      traefik.http.services.home-assistant.loadbalancer.server.port: 8123
 
 volumes:
   config:
