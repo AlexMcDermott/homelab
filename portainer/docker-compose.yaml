@@ -1,34 +1,7 @@
 services:
   portainer:
     image: portainer/portainer-ce:2.19.4
-    command: -H unix:///var/run/docker.sock
     container_name: portainer
-    restart: unless-stopped
-    networks:
-      - traefik_default
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - data:/data
-    labels:
-      traefik.enable: true
-
-      traefik.http.routers.portainer.tls: true
-      traefik.http.routers.portainer.tls.certresolver: cloudflare
-      traefik.http.routers.portainer.entrypoints: websecure
-      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
-      traefik.http.routers.portainer.service: portainer
-      traefik.http.services.portainer.loadbalancer.server.port: 9000
-
-      traefik.http.routers.portainer-edge-agent.tls: true
-      traefik.http.routers.portainer-edge-agent.tls.certresolver: cloudflare
-      traefik.http.routers.portainer-edge-agent.entrypoints: websecure
-      traefik.http.routers.portainer-edge-agent.rule: Host(`portainer-edge-agent.local.alexisthe.best`)
-      traefik.http.routers.portainer-edge-agent.service: portainer
-      traefik.http.services.portainer-edge.loadbalancer.server.port: 8000
-
-  portainer-edge-agent:
-    image: portainer/agent:2.19.4
-    container_name: portainer-edge-agent
     restart: unless-stopped
     networks:
       - traefik_default
@@ -36,16 +9,18 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/lib/docker/volumes:/var/lib/docker/volumes
       - /:/host
-      - edge-agent-data:/data
-    environment:
-      - EDGE=$EDGE
-      - EDGE_ID=$EDGE_ID
-      - EDGE_KEY=$EDGE_KEY
-      - EDGE_INSECURE_POLL=$EDGE_INSECURE_POLL
+      - data:/data
+    labels:
+      traefik.enable: true
+      traefik.http.routers.portainer.tls: true
+      traefik.http.routers.portainer.tls.certresolver: cloudflare
+      traefik.http.routers.portainer.entrypoints: websecure
+      traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)
+      traefik.http.routers.portainer.service: portainer
+      traefik.http.services.portainer.loadbalancer.server.port: 9000
 
 volumes:
   data:
-  edge-agent-data:
 
 networks:
   traefik_default:
