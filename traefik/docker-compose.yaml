@@ -47,3 +47,7 @@ services:
 
 volumes:
   ssl-certs:
+
+networks:
+  default:
+    driver: bridge
