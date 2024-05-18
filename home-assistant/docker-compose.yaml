@@ -21,11 +21,12 @@ services:
       - /run/dbus:/run/dbus:ro
     privileged: true
     network_mode: bridge
-    ports:
-      - "8123:8123"
-      - "21063:21063"
     labels:
       traefik.enable: true
+
+      traefik.tcp.routers.home-assistant.entrypoints: homekit
+      traefik.tcp.services.home-assistant.loadbalancer.server.port: 21063
+
       traefik.http.routers.home-assistant.tls: true
       traefik.http.routers.home-assistant.tls.certresolver: cloudflare
       traefik.http.routers.home-assistant.entrypoints: websecure
