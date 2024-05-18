@@ -3,8 +3,7 @@ services:
     image: adguard/adguardhome:v0.107.48
     container_name: adguardhome
     restart: unless-stopped
-    networks:
-      - traefik_default
+    network_mode: bridge
     volumes:
       - work:/opt/adguardhome/work
       - conf:/opt/adguardhome/conf
@@ -27,7 +26,3 @@ services:
 volumes:
   work:
   conf:
-
-networks:
-  traefik_default:
-    external: true

@@ -8,8 +8,7 @@ services:
       - configs:/app/data/configs
       - icons:/app/public/icons
       - data:/data
-    networks:
-      - traefik_default
+    network_mode: bridge
     labels:
       traefik.enable: true
       traefik.http.routers.homarr.tls: true
@@ -21,7 +20,3 @@ volumes:
   configs:
   icons:
   data:
-
-networks:
-  traefik_default:
-    external: true

@@ -7,6 +7,7 @@ services:
     environment:
       - SERVER_HOST_NAME=grom
       - SERVER_USE_IPV4=yes
+      - SERVER_USE_IPV6=yes
       - SERVER_ALLOW_INTERFACES=eno1,docker0
       - WIDE_AREA_ENABLE_WIDE_AREA=yes
       - REFLECTOR_ENABLE_REFLECTOR=yes
