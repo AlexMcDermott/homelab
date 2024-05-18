@@ -3,6 +3,7 @@ services:
     image: traefik:v2.11
     restart: unless-stopped
     container_name: traefik
+    network_mode: bridge
     environment:
       - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
     command: |
