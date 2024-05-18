@@ -17,6 +17,7 @@ services:
       --entryPoints.dnsudp.address=:53/udp
       --entryPoints.web.address=:80
       --entryPoints.websecure.address=:443
+      --entryPoints.homekit.address=:21063
 
       --entryPoints.web.http.redirections.entryPoint.to=websecure
       --entryPoints.web.http.redirections.entryPoint.scheme=https
