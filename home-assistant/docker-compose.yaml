@@ -6,11 +6,11 @@ services:
     network_mode: host
     environment:
       - SERVER_HOST_NAME=grom
-      - SERVER_USE_IPV4=yes
-      - SERVER_USE_IPV6=yes
       - SERVER_ALLOW_INTERFACES=eno1,docker0
-      - WIDE_AREA_ENABLE_WIDE_AREA=yes
       - REFLECTOR_ENABLE_REFLECTOR=yes
+    volumes:
+      - /run/dbus:/run/dbus
+
   home-assistant:
     image: ghcr.io/home-assistant/home-assistant:2024.4.2
     container_name: home-assistant
@@ -18,7 +18,7 @@ services:
     volumes:
       - config:/config
       - /etc/localtime:/etc/localtime:ro
-      - /run/dbus:/run/dbus:ro
+      - /run/dbus:/run/dbus
     privileged: true
     network_mode: bridge
     labels:
