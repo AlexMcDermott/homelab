@@ -21,8 +21,6 @@ services:
       - /run/dbus:/run/dbus
     privileged: true
     network_mode: bridge
-    # ports:
-    #   - "21063:21063"
     labels:
       traefik.enable: true
 
