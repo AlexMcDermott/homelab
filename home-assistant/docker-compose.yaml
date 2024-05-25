@@ -17,6 +17,7 @@ services:
     restart: unless-stopped
     volumes:
       - config:/config
+      - ./configuration.yaml:/config/configuration.yaml:ro
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus
     privileged: true
