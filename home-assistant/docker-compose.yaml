@@ -21,10 +21,13 @@ services:
       - /run/dbus:/run/dbus
     privileged: true
     network_mode: bridge
+    # ports:
+    #   - "21063:21063"
     labels:
       traefik.enable: true
 
       traefik.tcp.routers.home-assistant.entrypoints: homekit
+      traefik.tcp.routers.home-assistant.rule: HostSNI(`*`)
       traefik.tcp.services.home-assistant.loadbalancer.server.port: 21063
 
       traefik.http.routers.home-assistant.tls: true
