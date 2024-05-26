@@ -4,7 +4,7 @@ services:
     container_name: postgresql
     restart: unless-stopped
     networks:
-      - test
+      - traefik_default
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
       start_period: 20s
@@ -24,7 +24,7 @@ services:
     command: --save 60 1 --loglevel warning
     restart: unless-stopped
     networks:
-      - test
+      - traefik_default
     healthcheck:
       test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
       start_period: 20s
@@ -40,7 +40,7 @@ services:
     restart: unless-stopped
     command: server
     networks:
-      - test
+      - traefik_default
     environment:
       - AUTHENTIK_REDIS__HOST=redis
       - AUTHENTIK_POSTGRESQL__HOST=postgresql
@@ -72,7 +72,7 @@ services:
     restart: unless-stopped
     command: worker
     networks:
-      - test
+      - traefik_default
     environment:
       - AUTHENTIK_REDIS__HOST=redis
       - AUTHENTIK_POSTGRESQL__HOST=postgresql
@@ -97,7 +97,3 @@ volumes:
   media:
   custom-templates:
   certs:
-
-networks:
-  test:
-    driver: bridge

@@ -6,4 +6,5 @@ services:
     command: tunnel --no-autoupdate run
     environment:
       - TUNNEL_TOKEN=$TUNNEL_TOKEN
-    network_mode: bridge
+    networks:
+      - traefik_default

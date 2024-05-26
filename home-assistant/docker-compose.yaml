@@ -20,7 +20,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus
     privileged: true
-    network_mode: bridge
+    networks:
+      - traefik_default
     labels:
       traefik.enable: true
 
