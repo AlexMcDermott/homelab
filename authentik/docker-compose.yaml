@@ -97,3 +97,7 @@ volumes:
   media:
   custom-templates:
   certs:
+
+networks:
+  traefik_default:
+    external: true

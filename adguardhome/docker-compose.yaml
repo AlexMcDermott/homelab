@@ -27,3 +27,7 @@ services:
 volumes:
   work:
   conf:
+
+networks:
+  traefik_default:
+    external: true

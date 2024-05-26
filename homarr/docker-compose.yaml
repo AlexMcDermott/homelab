@@ -21,3 +21,7 @@ volumes:
   configs:
   icons:
   data:
+
+networks:
+  traefik_default:
+    external: true

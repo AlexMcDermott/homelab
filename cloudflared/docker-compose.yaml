@@ -8,3 +8,7 @@ services:
       - TUNNEL_TOKEN=$TUNNEL_TOKEN
     networks:
       - traefik_default
+
+networks:
+  traefik_default:
+    external: true
