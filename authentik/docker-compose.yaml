@@ -52,16 +52,14 @@ services:
     volumes:
       - media:/media
       - custom-templates:/templates
-    ports:
-      - "9000:9000"
-    # labels:
-    #   traefik.enable: true
-    #   traefik.http.routers.authentik.tls: true
-    #   traefik.http.routers.authentik.tls.certresolver: cloudflare
-    #   traefik.http.routers.authentik.entrypoints: websecure
-    #   traefik.http.routers.authentik.rule: Host(`authentik.local.alexisthe.best`)
-    #   traefik.http.routers.authentik.service: authentik
-    #   traefik.http.services.authentik.loadbalancer.server.port: 9000
+    labels:
+      traefik.enable: true
+      traefik.http.routers.authentik.tls: true
+      traefik.http.routers.authentik.tls.certresolver: cloudflare
+      traefik.http.routers.authentik.entrypoints: websecure
+      traefik.http.routers.authentik.rule: Host(`authentik.local.alexisthe.best`)
+      traefik.http.routers.authentik.service: authentik
+      traefik.http.services.authentik.loadbalancer.server.port: 9000
     depends_on:
       - postgresql
       - redis
