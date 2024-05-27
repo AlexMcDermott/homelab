@@ -36,7 +36,7 @@ services:
 
   server:
     image: ghcr.io/goauthentik/server:2024.4.2
-    container_name: authentik
+    container_name: authentik-server
     restart: unless-stopped
     command: server
     networks:
