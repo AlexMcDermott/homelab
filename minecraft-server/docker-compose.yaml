@@ -8,7 +8,8 @@ services:
     labels:
       traefik.enable: true
       traefik.tcp.routers.minecraft-server.entrypoints: minecraft
-      traefik.tcp.routers.minecraft-server.rule: Host(`iluvgrack.local.alexisthe.best`)
+      traefik.tcp.routers.minecraft-server.rule: HostSNI(`*`)
+      traefik.tcp.routers.minecraft-server.service: minecraft-server
       traefik.tcp.services.minecraft-server.loadbalancer.server.port: 25565
     environment:
       - EULA=TRUE
