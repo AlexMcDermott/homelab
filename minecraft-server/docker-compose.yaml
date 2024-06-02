@@ -1,0 +1,22 @@
+services:
+  minecraft-server:
+    image: itzg/minecraft-server:2024.5.0
+    container_name: minecraft-server
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    labels:
+      traefik.enable: true
+      traefik.tcp.routers.minecraft-server.entrypoints: minecraft
+      traefik.tcp.routers.minecraft-server.rule: Host(`iluvgrack.local.alexisthe.best`)
+      traefik.tcp.services.minecraft-server.loadbalancer.server.port: 25565
+    environment:
+      - EULA=TRUE
+      - VERSION=1.20.6
+    networks:
+      - traefik_default
+    volumes:
+      - data:/data
+
+volumes:
+  data:
