@@ -6,12 +6,25 @@ services:
     tty: true
     stdin_open: true
     environment:
-      - DEBUG=true
-      - EULA=true
-      - VERSION=1.20.6
+      DEBUG: true
+      EULA: true
+      TYPE: PURPUR
+      USE_SIMD_FLAGS: true
+      VERSION: 1.20.6
+      DIFFICULTY: normal
+      MOTD: "she's gracked"
+      CF_API_KEY: $CF_API_KEY
+      CURSEFORGE_FILES: |
+        https://www.curseforge.com/minecraft/bukkit-plugins/dead-chest
+        https://www.curseforge.com/minecraft/bukkit-plugins/dropheads
+        https://www.curseforge.com/minecraft/bukkit-plugins/spawnersilk
+        https://www.curseforge.com/minecraft/bukkit-plugins/thizzyz-tree-feller
+      OPS: |
+        beanjuicevrrrm
     networks:
       - traefik_default
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - data:/data
 
   router:
