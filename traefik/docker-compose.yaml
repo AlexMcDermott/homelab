@@ -9,7 +9,7 @@ services:
       --api=true
       --log.level=DEBUG
 
-      --providers.docker
+      --providers.docker=true
       --providers.docker.exposedByDefault=false
 
       --entryPoints.dnstcp.address=:53

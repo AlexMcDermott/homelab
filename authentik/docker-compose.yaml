@@ -42,6 +42,7 @@ services:
     networks:
       - traefik_default
     environment:
+      - AUTHENTIK_DEBUG=true
       - AUTHENTIK_REDIS__HOST=redis
       - AUTHENTIK_POSTGRESQL__HOST=postgresql
       - AUTHENTIK_POSTGRESQL__USER=${POSTGRES_USER}
@@ -53,12 +54,12 @@ services:
       - custom-templates:/templates
     labels:
       traefik.enable: true
-      traefik.http.routers.authentik.tls: true
-      traefik.http.routers.authentik.tls.certresolver: cloudflare
-      traefik.http.routers.authentik.entrypoints: websecure
-      traefik.http.routers.authentik.rule: Host(`authentik.local.alexisthe.best`)
-      traefik.http.routers.authentik.service: authentik
-      traefik.http.services.authentik.loadbalancer.server.port: 9000
+      traefik.http.routers.authentik-server.tls: true
+      traefik.http.routers.authentik-server.tls.certresolver: cloudflare
+      traefik.http.routers.authentik-server.entrypoints: websecure
+      traefik.http.routers.authentik-server.rule: Host(`authentik.local.alexisthe.best`)
+      traefik.http.routers.authentik-server.service: server
+      traefik.http.services.authentik-server.loadbalancer.server.port: 9000
     depends_on:
       - postgresql
       - redis
