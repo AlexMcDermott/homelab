@@ -30,7 +30,6 @@ services:
       --certificatesresolvers.cloudflare.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
     labels:
       traefik.enable: true
-      traefik.http.routers.traefik.tls: true
       traefik.http.routers.traefik.tls.certresolver: cloudflare
       traefik.http.routers.traefik.entrypoints: websecure
       traefik.http.routers.traefik.rule: Host(`traefik.local.alexisthe.best`)

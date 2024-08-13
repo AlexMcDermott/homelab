@@ -13,7 +13,6 @@ services:
     command: ["--log-level=DEBUG"]
     labels:
       traefik.enable: true
-      traefik.http.routers.portainer.tls: true
       traefik.http.routers.portainer.tls.certresolver: cloudflare
       traefik.http.routers.portainer.entrypoints: websecure
       traefik.http.routers.portainer.rule: Host(`portainer.local.alexisthe.best`)

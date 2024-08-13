@@ -30,7 +30,6 @@ services:
       traefik.tcp.routers.home-assistant.rule: HostSNI(`*`)
       traefik.tcp.services.home-assistant.loadbalancer.server.port: 21063
 
-      traefik.http.routers.home-assistant.tls: true
       traefik.http.routers.home-assistant.tls.certresolver: cloudflare
       traefik.http.routers.home-assistant.entrypoints: websecure
       traefik.http.routers.home-assistant.rule: Host(`home-assistant.local.alexisthe.best`)

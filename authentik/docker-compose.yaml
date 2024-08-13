@@ -54,7 +54,6 @@ services:
       - custom-templates:/templates
     labels:
       traefik.enable: true
-      traefik.http.routers.authentik-server.tls: true
       traefik.http.routers.authentik-server.tls.certresolver: cloudflare
       traefik.http.routers.authentik-server.entrypoints: websecure
       traefik.http.routers.authentik-server.rule: Host(`authentik.local.alexisthe.best`)
