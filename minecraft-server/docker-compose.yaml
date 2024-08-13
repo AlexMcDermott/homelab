@@ -40,7 +40,6 @@ services:
       traefik.enable: true
       traefik.tcp.routers.minecraft-router.entrypoints: minecraft
       traefik.tcp.routers.minecraft-router.rule: HostSNI(`*`)
-      traefik.tcp.routers.minecraft-router.service: router
       traefik.tcp.services.minecraft-router.loadbalancer.server.port: 25565
     networks:
       - traefik_default

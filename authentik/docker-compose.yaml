@@ -58,7 +58,6 @@ services:
       traefik.http.routers.authentik-server.tls.certresolver: cloudflare
       traefik.http.routers.authentik-server.entrypoints: websecure
       traefik.http.routers.authentik-server.rule: Host(`authentik.local.alexisthe.best`)
-      traefik.http.routers.authentik-server.service: server
       traefik.http.services.authentik-server.loadbalancer.server.port: 9000
     depends_on:
       - postgresql

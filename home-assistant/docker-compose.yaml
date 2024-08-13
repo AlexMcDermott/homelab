@@ -34,7 +34,6 @@ services:
       traefik.http.routers.home-assistant.tls.certresolver: cloudflare
       traefik.http.routers.home-assistant.entrypoints: websecure
       traefik.http.routers.home-assistant.rule: Host(`home-assistant.local.alexisthe.best`)
-      traefik.http.routers.home-assistant.service: home-assistant
       traefik.http.services.home-assistant.loadbalancer.server.port: 8123
 
 volumes:
