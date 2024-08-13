@@ -13,7 +13,7 @@ services:
       VERSION: 1.20.6
       DIFFICULTY: normal
       MOTD: "she's gracked"
-      CF_API_KEY: $CF_API_KEY
+      CF_API_KEY: ${CF_API_KEY}
       CURSEFORGE_FILES: |
         https://www.curseforge.com/minecraft/bukkit-plugins/dead-chest
         https://www.curseforge.com/minecraft/bukkit-plugins/dropheads
