@@ -44,7 +44,6 @@ services:
       - "21063:21063"
       - "25565:25565"
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ssl-certs:/ssl-certs
 
