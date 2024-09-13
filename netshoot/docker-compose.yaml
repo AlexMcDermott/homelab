@@ -1,0 +1,12 @@
+services:
+  netshoot:
+    image: nicolaka/netshoot:v0.13
+    container_name: netshoot
+    command: sleep infinity
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true
