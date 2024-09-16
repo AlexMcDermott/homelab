@@ -12,7 +12,7 @@ services:
       --providers.docker=true
       --providers.docker.exposedByDefault=false
 
-      --entryPoints.dnstcp.address=:53
+      --entryPoints.dnstcp.address=:53/tcp
       --entryPoints.dnsudp.address=:53/udp
       --entryPoints.web.address=:80
       --entryPoints.websecure.address=:443
