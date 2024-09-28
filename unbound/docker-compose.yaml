@@ -1,0 +1,14 @@
+services:
+  unbound:
+    image: mvance/unbound:1.20.0
+    container_name: unbound
+    restart: unless-stopped
+    networks:
+      traefik_default:
+        ipv4_address: 172.20.0.69
+    volumes:
+      - ./config/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
+
+networks:
+  traefik_default:
+    external: true
