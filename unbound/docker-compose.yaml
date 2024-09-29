@@ -8,6 +8,15 @@ services:
         ipv4_address: 172.20.0.69
     volumes:
       - ./config/unbound.conf:/opt/unbound/etc/unbound/unbound.conf
+    labels:
+      traefik.enable: true
+
+      traefik.tcp.routers.unbound.entrypoints: dnstcp
+      traefik.tcp.routers.unbound.rule: HostSNI(`*`)
+      traefik.tcp.services.unbound.loadbalancer.server.port: 53
+
+      traefik.udp.routers.unbound.entrypoints: dnsudp
+      traefik.udp.services.unbound.loadbalancer.server.port: 53
 
 networks:
   traefik_default:
