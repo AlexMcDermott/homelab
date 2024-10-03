@@ -8,6 +8,7 @@ services:
       - TS_HOSTNAME=grom
       - TS_EXTRA_ARGS=--advertise-tags=tag:container
       - TS_STATE_DIR=/var/lib/tailscale
+      - TS_ROUTES=192.168.50.0/24
     network_mode: host
     volumes:
       - state:/var/lib/tailscale
