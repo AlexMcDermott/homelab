@@ -1,0 +1,18 @@
+services:
+  samba:
+    image: ghcr.io/servercontainers/samba:smbd-avahi-a3.20.3-s4.19.6-r0
+    container_name: samba
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      AVAHI_NAME: Grom
+      WSDD2_DISABLE: 1
+      SAMBA_VOLUME_CONFIG_TERRAMASTER: |
+        [Terramaster]
+          path = /shares/terramaster
+          guest ok = yes
+          read only = yes 
+          browseable = yes
+    volumes:
+      - /etc/avahi/services/:/external/avahi
+      - /mnt/terramaster:/shares/terramaster:ro
