@@ -7,7 +7,7 @@ services:
       default:
         ipv4_address: 172.20.0.10
     environment:
-      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
+      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
     command: |
       --api=true
       --log.level=DEBUG
