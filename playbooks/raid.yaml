@@ -1,0 +1,91 @@
+---
+- name: Set up RAID 5 with ext4
+  hosts: localhost
+  become: true
+  vars:
+    raid_level: 5
+    raid_device: /dev/md0
+    raid_disks:
+      - /dev/sdb
+      - /dev/sdc
+      - /dev/sdd
+    mount_point: /mnt/terramaster
+    filesystem: ext4
+    raid_user: alexmcdermott
+
+  tasks:
+    - name: Ensure passwordless sudo for user
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        state: present
+        line: "{{ raid_user }} ALL=(ALL) NOPASSWD:ALL"
+        validate: "visudo -cf %s"
+
+    - name: Install required packages
+      ansible.builtin.apt:
+        name: mdadm
+        state: present
+        update_cache: yes
+
+    - name: Check if RAID array exists
+      ansible.builtin.command: mdadm --detail {{ raid_device }}
+      register: raid_check
+      ignore_errors: true
+      changed_when: false
+      check_mode: no
+
+    - name: Create RAID array if it doesn't exist
+      ansible.builtin.command: >
+        mdadm --create --verbose {{ raid_device }}
+        --level={{ raid_level }}
+        --raid-devices={{ raid_disks | length }}
+        {{ raid_disks | join(' ') }}
+      when: raid_check.rc != 0
+      register: raid_created
+
+    - name: Create {{ filesystem }} filesystem on RAID array
+      ansible.builtin.filesystem:
+        fstype: "{{ filesystem }}"
+        dev: "{{ raid_device }}"
+      when: raid_created.changed
+
+    - name: Create mount point
+      ansible.builtin.file:
+        path: "{{ mount_point }}"
+        state: directory
+
+    - name: Mount RAID array
+      ansible.builtin.mount:
+        path: "{{ mount_point }}"
+        src: "{{ raid_device }}"
+        fstype: "{{ filesystem }}"
+        state: mounted
+
+    - name: Update mdadm configuration
+      ansible.builtin.lineinfile:
+        path: /etc/mdadm/mdadm.conf
+        line: "{{ mdadm_conf.stdout }}"
+        state: present
+      when: raid_created.changed
+      vars:
+        mdadm_conf: "{{ lookup('pipe', 'mdadm --detail --scan') }}"
+
+    - name: Add entry to fstab
+      ansible.builtin.lineinfile:
+        path: /etc/fstab
+        line: "{{ raid_device }} {{ mount_point }} {{ filesystem }} defaults 0 0"
+        state: present
+
+    - name: Set ownership, permissions, and setgid bit on mounted filesystem
+      ansible.builtin.file:
+        path: "{{ mount_point }}"
+        owner: root
+        group: users
+        mode: "2775"
+        recurse: yes
+
+    - name: Add user to users group
+      ansible.builtin.user:
+        name: "{{ raid_user }}"
+        groups: users
+        append: yes
