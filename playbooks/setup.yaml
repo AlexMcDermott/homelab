@@ -1,8 +1,11 @@
 ---
-- name: Set up RAID 5 with ext4
-  hosts: localhost
+- name: Setup Debian server for hosting
+  hosts: all
   become: true
   vars:
+    static_ip: 192.168.50.22
+    netmask: 255.255.255.0
+    gateway: 192.168.50.1
     raid_level: 5
     raid_device: /dev/md0
     raid_disks:
@@ -11,16 +14,38 @@
       - /dev/sdd
     mount_point: /mnt/terramaster
     filesystem: ext4
-    raid_user: alexmcdermott
+    user: alexmcdermott
 
   tasks:
+    # Basics
     - name: Ensure passwordless sudo for user
       ansible.builtin.lineinfile:
         path: /etc/sudoers
         state: present
-        line: "{{ raid_user }} ALL=(ALL) NOPASSWD:ALL"
+        line: "{{ user }} ALL=(ALL) NOPASSWD:ALL"
         validate: "visudo -cf %s"
 
+    - name: Add user to users group
+      ansible.builtin.user:
+        name: "{{ user }}"
+        groups: users
+        append: yes
+
+    # Static IP
+    - name: Ensure static IP configuration for the active interface
+      ansible.builtin.blockinfile:
+        path: /etc/network/interfaces
+        block: |
+          auto {{ ansible_default_ipv4.interface }}
+          iface {{ ansible_default_ipv4.interface }} inet static
+            address {{ static_ip }}
+            netmask {{ netmask }}
+            gateway {{ gateway }}
+        marker: "# {mark} MANAGED BY ANSIBLE"
+        insertafter: "^auto {{ ansible_default_ipv4.interface }}$"
+        state: present
+
+      # Raid
     - name: Install required packages
       ansible.builtin.apt:
         name: mdadm
@@ -32,7 +57,6 @@
       register: raid_check
       ignore_errors: true
       changed_when: false
-      check_mode: no
 
     - name: Create RAID array if it doesn't exist
       ansible.builtin.command: >
@@ -54,38 +78,26 @@
         path: "{{ mount_point }}"
         state: directory
 
-    - name: Mount RAID array
-      ansible.builtin.mount:
-        path: "{{ mount_point }}"
-        src: "{{ raid_device }}"
-        fstype: "{{ filesystem }}"
-        state: mounted
-
     - name: Update mdadm configuration
       ansible.builtin.lineinfile:
         path: /etc/mdadm/mdadm.conf
-        line: "{{ mdadm_conf.stdout }}"
+        line: >
+          ARRAY {{ raid_device }} 
+          level={{ raid_level }} 
+          num-devices={{ raid_disks | length }} 
+          devices={{ raid_disks | join(',') }}
         state: present
-      when: raid_created.changed
-      vars:
-        mdadm_conf: "{{ lookup('pipe', 'mdadm --detail --scan') }}"
 
-    - name: Add entry to fstab
+    - name: Add entry to fstab for RAID
       ansible.builtin.lineinfile:
         path: /etc/fstab
-        line: "{{ raid_device }} {{ mount_point }} {{ filesystem }} defaults 0 0"
+        line: "{{ raid_device }} {{ mount_point }} {{ filesystem }} defaults,nofail 0 0"
         state: present
 
-    - name: Set ownership, permissions, and setgid bit on mounted filesystem
+    - name: Set ownership and permissions on filesystem
       ansible.builtin.file:
         path: "{{ mount_point }}"
         owner: root
         group: users
         mode: "2775"
         recurse: yes
-
-    - name: Add user to users group
-      ansible.builtin.user:
-        name: "{{ raid_user }}"
-        groups: users
-        append: yes
