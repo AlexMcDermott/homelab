@@ -59,6 +59,13 @@
     ];
   };
 
+  security.sudo.extraRules = [
+    {
+      users = [ "alexmcdermott" ];
+      commands = [ { command = "ALL"; options = [ "NOPASSWD" ]; } ];
+    }
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
