@@ -80,7 +80,7 @@
   users.users.alexmcdermott = {
     isNormalUser = true;
     description = "Alex McDermott";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "wheel" ];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = [
       ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICMlhea1MjjxvuQVXBy+11aSVZ3K55jFUfN1P2/CA3FX''
