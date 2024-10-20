@@ -22,11 +22,34 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.interfaces = {
-    eno1.ipv4.addresses = [ {
-      address = "192.168.50.22";
-      prefixLength = 24;
-    } ];
+  networking.useDHCP = false;
+  systemd.network.enable = true;
+  systemd.network.networks."eno1" = {
+    name = "eno1";
+    address = [ "192.168.50.22/24" ];
+    gateway = [ "192.168.50.1" ];
+    dns = [ "192.168.50.1" ];
+  };
+
+  # Raid
+  boot.swraid.enable = true;
+  boot.swraid.mdadmConf = ''
+    DEVICE /dev/disk/by-id/ata-*
+    PROGRAM ${pkgs.coreutils}/bin/true
+    ARRAY /dev/md0
+      uuid=a1669e4c:0de3d4fe:28fecd2b:ae8578b0
+      level=5
+      num-devices=3
+      devices=\
+        /dev/disk/by-id/ata-ST4000DM004-2U9104_WW63JBDH,\
+        /dev/disk/by-id/ata-ST4000DM004-2U9104_WW63SR0J,\
+        /dev/disk/by-id/ata-ST4000DM004-2U9104_WW63SMM8
+  '';
+
+  fileSystems."/mnt/terramaster" = {
+    device = "/dev/md0";
+    fsType = "ext4";
+    options = [ "defaults" "nofail" ];
   };
 
   # Set your time zone.
@@ -79,7 +102,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-     git
+    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
